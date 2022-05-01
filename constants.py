@@ -1,3 +1,16 @@
+import os
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
+HOST = os.environ.get('HOST')
+NAME = os.getenv('NAME')
+PASSWORD = os.getenv('PASSWORD')
+USER = os.getenv('USER_DB')
+PORT = os.getenv('PORT')
+PATH_FOR_DOWNLOAD = os.getenv('PATH_FOR_DOWNLOAD')
+NAME_FILE_XLSX = os.getenv('NAME_FILE_XLSX')
+NAME_FILE_DOCX = os.getenv('NAME_FILE_DOCX')
+
 ITEM = '№'
 TOKEN_EMPTY = '-'
 URL_FOR_DOWNLOAD_FILE = 'https://kcpt72.ru/schedule/'

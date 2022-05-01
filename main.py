@@ -3,10 +3,12 @@ from sheet.config import ConfigurationSheet
 from sheet.sheet import Sheet
 from database import models
 
+from constants import PATH_FOR_DOWNLOAD, NAME_FILE_XLSX
+
 
 def main():
 
-    file_name = 'src/schedule_1.xlsx'
+    file_name = f'{PATH_FOR_DOWNLOAD}/{NAME_FILE_XLSX}.xlsx'
     conf_schedule = ConfigurationSheet(file_name)
     for name in conf_schedule.sheet_names:
         sheet = Sheet(conf_schedule, name)
