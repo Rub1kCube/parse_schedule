@@ -27,9 +27,10 @@ class Sheet:
         groups = []
         for row in self.ws.values:
             for cell in row:
-                groups = re.findall(r'\w{2,10}\s?\d{2}-\d{2}-?\d?', cell) if cell is not None else []
+                groups = re.findall(r'[А-Яа-я\s]+\d{2}-\d{2}-?\d?', cell) \
+                    if cell is not None else []
                 if len(groups) != 0:
-                    return groups
+                    return list(map(lambda x: x.strip(), groups))
         if not groups:
             assert Exception('Не корректная страница')
 
