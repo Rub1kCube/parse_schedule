@@ -1,23 +1,20 @@
 from sqlalchemy import (
-    Table, Column, BigInteger,
-    Date, Integer, Time, String, ARRAY
+    Column, BigInteger, Date,
+    Integer, Time, String,
+    ARRAY
 )
+from database.connection import Base
 
-from database.connection import metadata, engine
 
+class Subject(Base):
 
-table_subject = Table(
-    'schedule_subject',
-    metadata,
-    Column('id', BigInteger, primary_key=True, autoincrement=True),
-    Column('number_cabinet', ARRAY(String(5)), nullable=True),
-    Column('title_subject', ARRAY(String(150)), nullable=True),
-    Column('name_teacher', ARRAY(String(20)), nullable=True),
-    Column('group_faculty', String(20)),
-    Column('number_subject', Integer),
-    Column('date_subject', Date),
-    Column('time_start', Time),
-)
+    __tablename__ = 'schedule_subject'
 
-metadata.create_all(engine)
-conn = engine.connect()
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    number_cabinet = Column(ARRAY(String(5)), nullable=True)
+    title_subject = Column(ARRAY(String(150)), nullable=True)
+    name_teacher = Column(ARRAY(String(20)), nullable=True)
+    group_faculty = Column(String(20))
+    number_subject = Column(Integer)
+    date_subject = Column(Date)
+    time_start = Column(Time)
