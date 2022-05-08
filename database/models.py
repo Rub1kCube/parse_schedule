@@ -3,7 +3,11 @@ from sqlalchemy import (
     Integer, Time, String,
     ARRAY
 )
-from database.connection import Base
+from sqlalchemy.orm import declarative_base
+
+from database.connection import engine
+
+Base = declarative_base(engine)
 
 
 class Subject(Base):
@@ -18,3 +22,7 @@ class Subject(Base):
     number_subject = Column(Integer)
     date_subject = Column(Date)
     time_start = Column(Time)
+    time_end = Column(Time)
+
+
+Base.metadata.create_all(engine)

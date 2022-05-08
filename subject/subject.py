@@ -12,7 +12,7 @@ class Subject:
         self.empty_subject = empty_subject
         self.empty_token = empty_token
         self.date_subject = date_subject
-        self.time_start = self.__time_weekday()
+        self.time_start, self.time_end = self.__time_weekday()
         self.group = group
 
         if empty_subject and empty_token is None:
@@ -26,9 +26,15 @@ class Subject:
         date = tuple(map(lambda n: int(n), self.date_subject.split('-')[::-1]))
         weekday = datetime.datetime(*date).weekday()
         if weekday in (0, 1, 2, 3, 4):
-            return CALL_SCHEDULE_ON_WEEKDAYS[self.number_subject].split('-')[0]
+            time = CALL_SCHEDULE_ON_WEEKDAYS[self.number_subject].split('-')
+            time_start = time[0]
+            time_end = time[1]
+            return time_start, time_end
         else:
-            return CALL_SCHEDULE_ON_WEEKEND[self.number_subject].split('-')[0]
+            time = CALL_SCHEDULE_ON_WEEKEND[self.number_subject].split('-')
+            time_start = time[0]
+            time_end = time[1]
+            return time_start, time_end
 
     def __str__(self):
         return f'{self.number_subject}, {self.title_subjects}'
@@ -40,7 +46,8 @@ class Subject:
                    'group_faculty': self.group,
                    'number_subject': self.number_subject,
                    'date_subject': self.date_subject,
-                   'time_start': self.time_start}
+                   'time_start': self.time_start,
+                   'time_end': self.time_end}
         return subject
 
     def __repr__(self):
